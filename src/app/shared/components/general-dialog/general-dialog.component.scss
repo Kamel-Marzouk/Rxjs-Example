@@ -1,0 +1,58 @@
+.pop-content {
+  padding: 40px 40px 30px;
+
+  .dialog-header {
+    display: flex;
+    align-items: center;
+
+    img {
+      margin-inline-end: 16px;
+    }
+  }
+
+  .pop-message-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-block-start: 28px;
+
+    .text-message {
+      width: 100%;
+      font-size: 17px;
+      line-height: 1.71;
+      color: #5a6c87;
+      margin-inline-start: 20px;
+      word-break: break-word;
+      white-space: pre-line;
+
+      .note-container {
+        margin-block-start: 30px;
+
+        h3 {
+          font-size: 12px;
+          font-weight: bold;
+          line-height: 1;
+          color: #5d6c85;
+        }
+
+        .info {
+          font-size: 10px;
+          line-height: 1;
+          color: #a5adba;
+        }
+      }
+    }
+  }
+}
+
+.btns-container {
+  height: 70px;
+  width: 100%;
+  background-color: #fbfcff;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 2rem 4rem;
+  border-radius:5px;
+}

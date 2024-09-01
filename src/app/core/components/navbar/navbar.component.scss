@@ -1,0 +1,27 @@
+nav {
+  padding: 1rem 0;
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    li a {
+      display: block;
+      color: #333;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    li a:hover,
+    li a.active {
+      background-color: #4b5cbb;
+      color: white;
+    }
+  }
+}

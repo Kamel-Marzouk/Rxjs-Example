@@ -1,0 +1,11 @@
+<div class="counter-container">
+  <div class="row">
+    <button (click)="decrement()">-</button>
+    <div>
+      {{ counter$ | async }}
+    </div>
+
+    <button (click)="increment()">+</button>
+    <button (click)="reset()">Reset</button>
+  </div>
+</div>

@@ -1,0 +1,64 @@
+<section>
+  <h3 mat-dialog-title>
+    {{ (title === "edit" ? "Edit" : "Add") + " Product" }}
+  </h3>
+
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <mat-dialog-content class="mat-typography">
+      <mat-form-field>
+        <mat-label>Product Name</mat-label>
+        <input
+          matInput
+          placeholder="Enter Product Name"
+          formControlName="name"
+          value=""
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Quantity</mat-label>
+        <input
+          matInput
+          placeholder="Enter Quantity"
+          formControlName="quantity"
+          value=""
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Cost</mat-label>
+        <input
+          matInput
+          placeholder="Enter Cost"
+          formControlName="cost"
+          value=""
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Family id</mat-label>
+        <input
+          matInput
+          placeholder="Enter Family Id"
+          formControlName="familyId"
+          value=""
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Location Id</mat-label>
+        <input
+          matInput
+          placeholder="Enter Location Id"
+          formControlName="locationId"
+          value=""
+        />
+      </mat-form-field>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+      <button mat-button color="warn" mat-dialog-close>Cancel</button>
+      <button mat-button color="primary" type="submit" cdkFocusInitial [disabled]="productForm.invalid">
+        Submit
+      </button>
+    </mat-dialog-actions>
+  </form>
+</section>

@@ -1,0 +1,39 @@
+@if (products.length) {
+  <button (click)="createUpdateProduct()" mat-raised-button>Add Product</button>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>ID</th>
+        <th>Family ID</th>
+        <th>Location ID</th>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Cost</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(product of products; track $index ){
+      <tr>
+        <td>{{ $index + 1 }}</td>
+        <td>{{ product.id }}</td>
+        <td>{{ product.familyId }}</td>
+        <td>{{ product.locationId }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.quantity }}</td>
+        <td>{{ product.cost }}</td>
+        <td>
+          <button class="edit-button" (click)="createUpdateProduct(product)">
+            Edit
+          </button>
+          <button class="delete-button" (click)="deleteProduct(product)">
+            Delete
+          </button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+}

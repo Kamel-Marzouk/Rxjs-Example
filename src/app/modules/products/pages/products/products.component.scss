@@ -1,0 +1,51 @@
+:host {
+  padding-block-start: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: flex-start;
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    th {
+      background-color: #4b5cbb;
+      color: white;
+    }
+
+    td {
+      text-align: center;
+    }
+
+    td {
+      &:nth-last-child(1) {
+        display: flex;
+        justify-content: space-around;
+      }
+      button {
+        color: white;
+        padding: 8px 12px;
+        border: none;
+        cursor: pointer;
+      }
+      .edit-button {
+        background-color: #4b5cbb;
+      }
+
+      .delete-button {
+        background-color: #df3a2f;
+      }
+    }
+  }
+}
