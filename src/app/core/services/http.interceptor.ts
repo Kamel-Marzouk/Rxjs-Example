@@ -9,9 +9,8 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
 
   spinnerService.show();
 
-  return timer(3000).pipe(
-    // Delay the request by 10 seconds
-    switchMap(() => next(req)), // Execute the HTTP request after the delay
-    finalize(() => spinnerService.hide()) // Hide the spinner after the request completes
+  return timer(1000).pipe(
+    switchMap(() => next(req)),
+    finalize(() => spinnerService.hide())
   );
 };

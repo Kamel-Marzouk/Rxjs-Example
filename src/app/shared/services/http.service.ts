@@ -4,14 +4,16 @@ import {
   HttpErrorResponse,
   HttpHeaders,
 } from '@angular/common/http';
-import { Observable, throwError, timer } from 'rxjs';
-import { catchError, delay, switchMap } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 const httpHeaders: HttpHeaders = new HttpHeaders({
   'Content-Type': 'application/json',
 });
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class HttpService {
   private baseURL: string = 'http://localhost:3000';
 
@@ -22,18 +24,6 @@ export class HttpService {
       .get<any[]>(this.baseURL + url, { headers: httpHeaders })
       .pipe(catchError(this.handleError));
   }
-
-  // public getAll(url: string): Observable<any[]> {
-  //   return timer(10000).pipe(
-  //     // Wait for 10 seconds before executing the HTTP request
-  //     switchMap(() =>
-  //       this.httpClient.get<any[]>(this.baseURL + url, {
-  //         headers: httpHeaders,
-  //       })
-  //     ),
-  //     catchError(this.handleError)
-  //   );
-  // }
 
   public create(url: string, resources: any): Observable<any> {
     return this.httpClient

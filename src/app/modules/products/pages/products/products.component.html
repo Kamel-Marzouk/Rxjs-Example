@@ -5,7 +5,6 @@
     <thead>
       <tr>
         <th>#</th>
-        <th>ID</th>
         <th>Family ID</th>
         <th>Location ID</th>
         <th>Name</th>
@@ -18,7 +17,6 @@
       @for(product of products; track $index ){
       <tr>
         <td>{{ $index + 1 }}</td>
-        <td>{{ product.id }}</td>
         <td>{{ product.familyId }}</td>
         <td>{{ product.locationId }}</td>
         <td>{{ product.name }}</td>

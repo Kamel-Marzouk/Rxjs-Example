@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateUpdateProductComponent } from '../../components/create-update-product/create-update-product.component';
 import { MatButtonModule } from '@angular/material/button';
 import { Actions } from '../../../../shared/enums/Actions';
+import { SnackBarService } from '../../../../shared/services/snak-bar.service';
 import { GeneralDialogComponent } from '../../../../shared/components/general-dialog/general-dialog.component';
 
 @Component({
@@ -28,6 +29,7 @@ export class ProductsComponent implements OnInit {
   constructor(
     private store: Store,
     private dialog: MatDialog,
+    private snackBarService: SnackBarService
   ) {}
 
   ngOnInit(): void {
@@ -66,10 +68,18 @@ export class ProductsComponent implements OnInit {
 
   private createProduct(product: Product): void {
     this.store.dispatch(Productactions.postProduct({ product: product }));
+    this.snackBarService.openSnackBar(
+      'The product has been created successfully',
+      Actions.add
+    );
   }
 
   private updateProduct(product: Product): void {
     this.store.dispatch(Productactions.putProduct({ product: product }));
+    this.snackBarService.openSnackBar(
+      'The product has been updated successfully',
+      Actions.edit
+    );
   }
 
   deleteProduct(product: Product): void {
@@ -91,5 +101,9 @@ export class ProductsComponent implements OnInit {
 
   private deleteProductById(product: Product): void {
     this.store.dispatch(Productactions.deleteProduct({ product: product }));
+    this.snackBarService.openSnackBar(
+      'The product has been deleted successfully',
+      Actions.delete
+    );
   }
 }
