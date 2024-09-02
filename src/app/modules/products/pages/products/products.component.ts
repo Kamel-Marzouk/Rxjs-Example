@@ -1,12 +1,7 @@
 import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Product } from '../../../../store/product.model';
 import { select, Store } from '@ngrx/store';
-import {
-  deleteProduct,
-  postProduct,
-  putProduct,
-  setProducts,
-} from '../../../../store/actions/product.action';
+import * as Productactions from '../../../../store/actions/product.action';
 import { selectProduct } from '../../../../store/selectors/product.selector';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { AsyncPipe, isPlatformBrowser } from '@angular/common';
@@ -15,7 +10,6 @@ import { CreateUpdateProductComponent } from '../../components/create-update-pro
 import { MatButtonModule } from '@angular/material/button';
 import { Actions } from '../../../../shared/enums/Actions';
 import { GeneralDialogComponent } from '../../../../shared/components/general-dialog/general-dialog.component';
-import { HttpService } from '../../../../shared/services/http.service';
 
 @Component({
   selector: 'app-products',
@@ -23,7 +17,7 @@ import { HttpService } from '../../../../shared/services/http.service';
   imports: [AsyncPipe, MatButtonModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
-  providers: [HttpService],
+  providers: [],
 })
 export class ProductsComponent implements OnInit {
   destroy$: Subject<boolean> = new Subject<boolean>();
@@ -34,13 +28,12 @@ export class ProductsComponent implements OnInit {
   constructor(
     private store: Store,
     private dialog: MatDialog,
-    private httpService: HttpService
   ) {}
 
   ngOnInit(): void {
     if (!isPlatformBrowser(this.platformId)) return;
-      this.productsSubscriptions();
-      this.getProducts();
+    this.productsSubscriptions();
+    this.getProducts();
   }
 
   private productsSubscriptions(): void {
@@ -52,11 +45,7 @@ export class ProductsComponent implements OnInit {
   }
 
   private getProducts(): void {
-    this.httpService.getAll('/products').subscribe({
-      next: (res) => {
-        this.store.dispatch(setProducts({ products: res }));
-      },
-    });
+    this.store.dispatch(Productactions.getAllProducts());
   }
 
   createUpdateProduct(product?: Product): void {
@@ -70,24 +59,17 @@ export class ProductsComponent implements OnInit {
       if (!result) return;
       if (instance.title === Actions.add)
         this.createProduct(instance.productForm.value);
-      else this.updateProduct(product?.id, instance.productForm.value);
+      else
+        this.updateProduct({ ...instance.productForm.value, id: product?.id });
     });
   }
 
   private createProduct(product: Product): void {
-    this.httpService.create('/products', product).subscribe({
-      next: (product) => {
-        this.store.dispatch(postProduct({ product: product }));
-      },
-    });
+    this.store.dispatch(Productactions.postProduct({ product: product }));
   }
 
-  private updateProduct(productId: string | undefined, product: Product): void {
-    this.httpService.update('/products', productId, product).subscribe({
-      next: (product) => {
-        this.store.dispatch(putProduct({ product: product }));
-      },
-    });
+  private updateProduct(product: Product): void {
+    this.store.dispatch(Productactions.putProduct({ product: product }));
   }
 
   deleteProduct(product: Product): void {
@@ -103,15 +85,11 @@ export class ProductsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (!result) return;
-      this.deleteProductById(result.id);
+      this.deleteProductById(result);
     });
   }
 
-  private deleteProductById(productId: string): void {
-    this.httpService.delete('/products', productId).subscribe({
-      next: (product) => {
-        this.store.dispatch(deleteProduct({ product: product }));
-      },
-    });
+  private deleteProductById(product: Product): void {
+    this.store.dispatch(Productactions.deleteProduct({ product: product }));
   }
 }
