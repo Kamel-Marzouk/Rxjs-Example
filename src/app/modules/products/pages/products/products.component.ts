@@ -85,7 +85,7 @@ export class ProductsComponent implements OnInit {
   deleteProduct(product: Product): void {
     const dialogRef = this.dialog.open(GeneralDialogComponent, {
       width: '480px',
-      height: '26vh',
+      height: '235px',
       data: product,
     });
     const instance = dialogRef.componentInstance;
