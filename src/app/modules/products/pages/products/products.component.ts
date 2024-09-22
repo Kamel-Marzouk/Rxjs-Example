@@ -9,7 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateUpdateProductComponent } from '../../components/create-update-product/create-update-product.component';
 import { MatButtonModule } from '@angular/material/button';
 import { Actions } from '../../../../shared/enums/Actions';
-import { SnackBarService } from '../../../../shared/services/snak-bar.service';
+import { SnackBarService } from '../../../../shared/services/snack-bar.service';
 import { GeneralDialogComponent } from '../../../../shared/components/general-dialog/general-dialog.component';
 
 @Component({

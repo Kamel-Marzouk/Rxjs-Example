@@ -1,0 +1,43 @@
+<div class="container">
+  <section class="section-one">
+    <mat-form-field>
+      <mat-label>Select a team member</mat-label>
+      <mat-select (selectionChange)="onSelected($event.value)">
+        <mat-option> None </mat-option>
+        @for (user of users(); track user.id) {
+        <mat-option [value]="user.id">{{ user.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <mat-checkbox
+      class="example-margin"
+      (change)="onFilter($event.checked)"
+      [disabled]="!todosForMember().length"
+      >Show only incomplete tasks</mat-checkbox
+    >
+  </section>
+  <h2>
+    ToDos @if (currentMember()) { for: {{ currentMember()?.name }}
+    }
+  </h2>
+  @if (todosForMember().length > 0) {
+  <div class="grid">
+    <div class="cellHeader">Todo</div>
+    <div class="cellHeader">Completed?</div>
+
+    @for(todo of todosForMember(); track todo.id) {
+    <div class="cell">{{ todo.title }}</div>
+    <div class="cellCheck">
+      <mat-checkbox
+        [checked]="todo.completed"
+        (change)="onChangeStatus(todo, $event.checked)"
+      ></mat-checkbox>
+    </div>
+    } @empty { @if(!isLoading()) {
+    <div>No todos found</div>
+    } }
+  </div>
+  } @if (errorMessage()) {
+  <div>Error: {{ errorMessage() }}</div>
+  }
+</div>
