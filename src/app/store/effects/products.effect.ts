@@ -57,8 +57,6 @@ export class ProductsEffects {
     this.actions$.pipe(
       ofType(Productactions.deleteProduct),
       mergeMap((action) => {
-        console.log(action);
-
         return this.httpService
           .delete('/products', action.product.id!)
           .pipe(map(() => Productactions.getAllProducts()));
